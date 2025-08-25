@@ -1,5 +1,5 @@
 import { IMedicine } from '@/models/Medicine';
-import { X, Pill, Building2, Tag, DollarSign, Package, Calendar, Hash } from 'lucide-react';
+import { X, Pill, Building2, Tag, DollarSign, Package, Hash } from 'lucide-react';
 
 interface MedicineModalProps {
   medicine: IMedicine;

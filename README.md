@@ -34,7 +34,7 @@ A comprehensive Next.js web application for searching and browsing medicines and
 
 1. **Clone the repository**
    ```bash
-   git clone <your-repository-url>
+   git clone https://github.com/farhan-sadik247/bdmedicine_database.git
    cd medicine-website
    ```
 
@@ -46,7 +46,7 @@ A comprehensive Next.js web application for searching and browsing medicines and
 3. **Set up environment variables**
    Create a `.env.local` file in the root directory:
    ```env
-   MONGODB_URI=mongodb+srv://your-username:your-password@cluster.mongodb.net/bdmedicine?retryWrites=true&w=majority&appName=medicine
+   MONGODB_URI=mongodb+srv://your-username:your-password@cluster.mongodb.net/?retryWrites=true&w=majority&appName=medicine
    NEXT_PUBLIC_APP_URL=http://localhost:3000
    ```
 

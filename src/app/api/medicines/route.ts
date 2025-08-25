@@ -2,6 +2,16 @@ import { NextRequest, NextResponse } from 'next/server';
 import dbConnect from '@/lib/mongodb';
 import Medicine from '@/models/Medicine';
 
+interface FilterObject {
+  $text?: { $search: string };
+  category_name?: RegExp;
+  manufacturer_name?: RegExp;
+  price?: {
+    $gte?: number;
+    $lte?: number;
+  };
+}
+
 export async function GET(request: NextRequest) {
   try {
     await dbConnect();
@@ -18,7 +28,7 @@ export async function GET(request: NextRequest) {
     const sortOrder = searchParams.get('sortOrder') || 'asc';
 
     // Build filter object
-    const filter: any = {};
+    const filter: FilterObject = {};
 
     // Text search
     if (search) {
@@ -46,7 +56,7 @@ export async function GET(request: NextRequest) {
     const skip = (page - 1) * limit;
 
     // Build sort object
-    const sort: any = {};
+    const sort: { [key: string]: 1 | -1 } = {};
     sort[sortBy] = sortOrder === 'desc' ? -1 : 1;
 
     // Execute query

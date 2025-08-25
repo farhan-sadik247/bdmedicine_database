@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useDebounce } from 'use-debounce';
 import Header from '@/components/Header';
 import Filters from '@/components/Filters';
@@ -41,7 +41,7 @@ export default function Home() {
   const [currentPage, setCurrentPage] = useState(1);
 
   // Fetch medicines
-  const fetchMedicines = async (page = 1) => {
+  const fetchMedicines = useCallback(async (page = 1) => {
     setIsLoading(true);
     try {
       const params = new URLSearchParams({
@@ -67,12 +67,12 @@ export default function Home() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [debouncedSearch, filters, sortBy, sortOrder, pagination.limit]);
 
   // Effect to fetch data when dependencies change
   useEffect(() => {
     fetchMedicines(1);
-  }, [debouncedSearch, filters, sortBy, sortOrder]);
+  }, [fetchMedicines]);
 
   // Handle page change
   const handlePageChange = (page: number) => {
@@ -85,7 +85,7 @@ export default function Home() {
   };
 
   // Handle filters
-  const handleFiltersChange = (newFilters: any) => {
+  const handleFiltersChange = (newFilters: typeof filters) => {
     setFilters(newFilters);
   };
 

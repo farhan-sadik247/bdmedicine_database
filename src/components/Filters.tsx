@@ -8,7 +8,12 @@ interface FiltersProps {
     minPrice: string;
     maxPrice: string;
   };
-  onFiltersChange: (filters: any) => void;
+  onFiltersChange: (filters: {
+    category: string;
+    manufacturer: string;
+    minPrice: string;
+    maxPrice: string;
+  }) => void;
   onClearFilters: () => void;
   isLoading?: boolean;
 }
@@ -23,7 +28,7 @@ interface FilterData {
   };
 }
 
-export default function Filters({ filters, onFiltersChange, onClearFilters, isLoading }: FiltersProps) {
+export default function Filters({ filters, onFiltersChange, onClearFilters }: FiltersProps) {
   const [filterData, setFilterData] = useState<FilterData>({
     categories: [],
     manufacturers: [],
