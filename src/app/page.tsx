@@ -124,6 +124,8 @@ export default function Home() {
               filters={filters}
               onFiltersChange={handleFiltersChange}
               onClearFilters={handleClearFilters}
+              searchQuery={search}
+              onSearchChange={setSearch}
               isLoading={isLoading}
             />
           </aside>

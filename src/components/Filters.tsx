@@ -1,4 +1,4 @@
-import { Filter, X } from 'lucide-react';
+import { Filter, X, Search } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 interface FiltersProps {
@@ -15,6 +15,8 @@ interface FiltersProps {
     maxPrice: string;
   }) => void;
   onClearFilters: () => void;
+  searchQuery: string;
+  onSearchChange: (query: string) => void;
   isLoading?: boolean;
 }
 
@@ -28,7 +30,7 @@ interface FilterData {
   };
 }
 
-export default function Filters({ filters, onFiltersChange, onClearFilters }: FiltersProps) {
+export default function Filters({ filters, onFiltersChange, onClearFilters, searchQuery, onSearchChange }: FiltersProps) {
   const [filterData, setFilterData] = useState<FilterData>({
     categories: [],
     manufacturers: [],
@@ -79,6 +81,23 @@ export default function Filters({ filters, onFiltersChange, onClearFilters }: Fi
         </div>
 
         <div className="space-y-6">
+          {/* Search Input */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Search Medicines
+            </label>
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+              <input
+                type="text"
+                placeholder="Search by name, generic, or strength..."
+                value={searchQuery}
+                onChange={(e) => onSearchChange(e.target.value)}
+                className="w-full pl-10 p-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 focus:border-blue-500 text-gray-900 bg-white placeholder-gray-500"
+              />
+            </div>
+          </div>
+
           {/* Category Filter */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
